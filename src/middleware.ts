@@ -10,9 +10,10 @@ const HOSTNAME_TO_PATH: Record<string, string> = {
   // Helpful for local testing: send localhost to an existing route
 
   "apple.localhost": "/careerpages",
+  "apple": "/careerpages",
   "127.0.0.1": "/testing",
-  "lucres": "/careerpages",
-  "bonageri":  "/",
+  "lucres": "/careerpages",  //Testing Purpose Assume as company
+  "bonageri":  "/",   //Tesing purpose Assume as lucres.com
 };
 
 export function middleware(request: NextRequest) {
@@ -24,7 +25,7 @@ export function middleware(request: NextRequest) {
 
   const hostname = headerHost.split(":")[0]?.toLowerCase().split(".");
     console.log("HOSTNAME", hostname[1]);
-  const targetPath = HOSTNAME_TO_PATH[hostname[0]];
+  const targetPath = HOSTNAME_TO_PATH[hostname[1]];
   if (targetPath) {
     // Only rewrite from the site root to avoid catching static assets or nested routes
     if (url.pathname === "/") {
